@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import type { Crawl } from '../components/types';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://172.31.20.135:3001';
 
 export interface SavedCrawl {
   id: string;

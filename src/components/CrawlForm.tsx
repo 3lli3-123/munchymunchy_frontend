@@ -3,7 +3,7 @@ import { MapPin, DollarSign, Clock, ChevronRight, ChevronLeft } from 'lucide-rea
 import type { CrawlParams, BudgetTier } from './types';
 import { BUDGET_TIERS } from '../utils/pricerangestuff';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://172.31.20.135:3001';
 const AUTOCOMPLETE_DEBOUNCE_MS = 300;
 
 interface Props {
