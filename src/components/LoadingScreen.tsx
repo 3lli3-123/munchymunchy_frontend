@@ -33,49 +33,56 @@ export function LoadingScreen() {
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden"
       style={{ backgroundColor: '#FDF8EF' }}
     >
-      {/* Scrapbook Images */}
-      {SCRAPBOOK_IMAGES.map((img, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, scale: 1.5, rotate: img.rotate + 20 }}
-          animate={{ 
-            opacity: index < visibleCount ? 1 : 0, 
-            scale: index < visibleCount ? 1 : 1.5,
-            rotate: index < visibleCount ? img.rotate : img.rotate + 20 
-          }}
-          transition={{ 
-            type: "spring", 
-            stiffness: 100, 
-            damping: 15,
-            duration: 0.8 
-          }}
-          className="absolute w-48 h-48 md:w-64 md:h-64 pointer-events-none"
-          style={{ 
-            left: img.x, 
-            top: img.y,
-            boxShadow: '0 10px 30px rgba(245, 159, 0, 0.2)',
-            padding: '8px',
-            backgroundColor: 'white',
-            borderRadius: '4px'
-          }}
-        >
-          <div className="w-full h-full overflow-hidden rounded-sm relative">
-             <ImageWithFallback 
-              src={img.url} 
-              alt="Food" 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 border-[8px] border-white/10" />
-          </div>
-        </motion.div>
-      ))}
+      {/* Scrapbook Images - Visible on all devices with responsive sizing */}
+      {SCRAPBOOK_IMAGES.map((img, index) => {
+        // Adjust positions and sizes for mobile - lower opacity on mobile to not cover text
+        const isMobileSize = window.innerWidth < 640;
+        const sizeClass = isMobileSize ? 'w-24 h-24' : (window.innerWidth < 1024 ? 'w-32 h-32' : 'w-40 h-40');
+        
+        return (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 1.5, rotate: img.rotate + 20 }}
+            animate={{ 
+              opacity: index < visibleCount ? (isMobileSize ? 0.5 : 1) : 0, 
+              scale: index < visibleCount ? 1 : 1.5,
+              rotate: index < visibleCount ? img.rotate : img.rotate + 20 
+            }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 100, 
+              damping: 15,
+              duration: 0.8 
+            }}
+            className={`absolute ${sizeClass} pointer-events-none`}
+            style={{ 
+              left: isMobileSize ? `calc(50% + ${(parseFloat(img.x) - 50) * 0.6}%)` : img.x,
+              top: isMobileSize ? `calc(50% + ${(parseFloat(img.y) - 50) * 0.6}%)` : img.y,
+              transform: isMobileSize ? 'translate(-50%, -50%)' : 'translate(0, 0)',
+              boxShadow: '0 10px 30px rgba(245, 159, 0, 0.2)',
+              padding: '8px',
+              backgroundColor: 'white',
+              borderRadius: '4px'
+            }}
+          >
+            <div className="w-full h-full overflow-hidden rounded-sm relative">
+               <ImageWithFallback 
+                src={img.url} 
+                alt="Food" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 border-[8px] border-white/10" />
+            </div>
+          </motion.div>
+        );
+      })}
 
       {/* Center Branding */}
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 flex flex-col items-center"
+        className="relative z-10 flex flex-col items-center px-6"
       >
         <motion.div
           animate={{ 
@@ -88,16 +95,16 @@ export function LoadingScreen() {
             ease: "easeInOut" 
           }}
           className="flex items-center justify-center"
-          style={{ width: '7rem', height: '7rem'}}
+          style={{ width: 'clamp(5rem, 15vw, 7rem)', height: 'clamp(5rem, 15vw, 7rem)'}}
         >
-          <img src="/munch.png" alt="Munchy" className="w-16 h-16" />
+          <img src="/munch.png" alt="Munchy" className="w-full h-full" />
         </motion.div>
 
         <motion.h1 
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="text-6xl font-bold tracking-tighter" 
-          style={{ color: '#242116' }}
+          className="font-bold tracking-tighter text-center" 
+          style={{ color: '#242116', fontSize: 'clamp(2rem, 8vw, 3.75rem)' }}
         >
           Munchy Munchy
         </motion.h1>
@@ -106,7 +113,7 @@ export function LoadingScreen() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="mt-4 font-medium tracking-wide uppercase text-sm"
+          className="mt-4 font-medium tracking-wide uppercase text-xs sm:text-sm text-center"
           style={{ color: '#F59F00', letterSpacing: '0.2em' }}
         >
           Curating your journey...

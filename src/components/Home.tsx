@@ -227,22 +227,6 @@ export default function Home() {
       
       {/* Top right user controls */}
       <div style={{ position: 'fixed', top: '16px', right: '24px', zIndex: 100, display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <button
-          onClick={() => setShowSavedCrawls(true)}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: 'white',
-            color: '#242116',
-            border: '2px solid #F59F00',
-            borderRadius: '8px',
-            fontWeight: 600,
-            cursor: 'pointer',
-            fontSize: '0.875rem',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-          }}
-        >
-          My Crawls
-        </button>
         <UserButton afterSignOutUrl="/" />
       </div>
 
@@ -274,6 +258,24 @@ export default function Home() {
           <p className="text-xl max-w-2xl mx-auto opacity-80" style={{ color: '#242116' }}>
             Curating personalized food crawls, one munch at a time.
           </p>
+          <div className="pt-6 flex justify-center">
+            <button
+              onClick={() => setShowSavedCrawls(true)}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: 'white',
+                color: '#242116',
+                border: '2px solid #F59F00',
+                borderRadius: '8px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                fontSize: '0.875rem',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+              }}
+            >
+              My Crawls
+            </button>
+          </div>
         </header>
 
         {/* Animated content */}
