@@ -1,0 +1,115 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Parkinsans:wght@300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+/* Root variables */
+:root {
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Parkinsans', sans-serif;
+  --font-accent: 'Rubik', sans-serif;
+  --font-size: 16px;
+  --radius: 0.625rem;
+
+  --primary: #F59F00;
+  --secondary: #C1EA78;
+  --background: #FFF6ED;
+  --foreground: #242116;
+  --darktext: #242116;
+
+  --card: #ffffff;
+  --card-foreground: #242116;
+  --popover: #ffffff;
+  --popover-foreground: #242116;
+  --border: rgba(0,0,0,0.1);
+}
+
+/* Dark mode */
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --secondary: oklch(0.269 0 0);
+}
+
+/* Tailwind theme mapping */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-darktext: var(--darktext);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Base styles */
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: var(--font-size);
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *, *::before, *::after {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+}
+
+/* Typography */
+@layer base {
+  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 2.25rem; /* text-4xl approx */
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 1.875rem; /* text-3xl */
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem; /* text-2xl */
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    h4 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem; /* text-xl */
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    label {
+      font-family: var(--font-body);
+      font-size: 1rem; /* text-base */
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    button {
+      font-family: var(--font-accent);
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    input {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+  }
+}
