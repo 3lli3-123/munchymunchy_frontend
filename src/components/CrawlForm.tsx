@@ -3,7 +3,7 @@ import { MapPin, DollarSign, Clock, ChevronRight, ChevronLeft } from 'lucide-rea
 import type { CrawlParams, BudgetTier } from './types';
 import { BUDGET_TIERS } from '../utils/pricerangestuff';
 
-const API_BASE = 'https://api.munchymunchy.com';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://api.munchymunchy.com';
 const AUTOCOMPLETE_DEBOUNCE_MS = 300;
 
 interface Props {
@@ -197,7 +197,10 @@ function CityComponent(props: CityProps) {
         <input
           type="text"
           value={props.city}
-          onChange={(e) => props.setCity(e.target.value)}
+          onChange={(e) => {
+            props.setCity(e.target.value);
+            props.setIsCityDropdown(true);
+          }}
           onFocus={() => props.setIsCityDropdown(true)}
           onBlur={() => setTimeout(() => props.setIsCityDropdown(false), 200)}
           placeholder="Type a city name..."

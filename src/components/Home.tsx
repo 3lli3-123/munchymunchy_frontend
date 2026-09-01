@@ -8,7 +8,7 @@ import { useSavedCrawls } from '../hooks/useSavedCrawls';
 import { cities } from './utils/citymock';
 import type { CrawlParams, Crawl, Stop, BudgetTier } from './types.tsx';
 
-const API_BASE = 'https://api.munchymunchy.com';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://api.munchymunchy.com';
 
 export default function Home() {
   const [crawl, setCrawl] = useState<Crawl | null>(null);
